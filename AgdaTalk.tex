@@ -1,0 +1,106 @@
+\documentclass[12pt,parskip=half,headings=normal,abstract]{scrartcl}
+
+\usepackage[T3,T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amsmath}
+\usepackage[standard]{ntheorem}
+\usepackage{amscd}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{faktor}
+\usepackage{enumerate}
+\usepackage{wrapfig}
+
+\usepackage[pdfauthor={Joachim Breitner},pdftitle={Agda: Mit starken Typen abhängen},pdfsubject={Eine Demo der abhängig getypten Programmiersprache}]{hyperref}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{ragged2e}
+\usepackage[para]{footmisc}
+\usepackage{fourier}
+\usepackage{microtype}
+\usepackage{comment}
+
+\usepackage{tikz}
+\usetikzlibrary{shadows}
+
+\newcommand*\keystroke[1]{%
+  \tikz[baseline=(key.base)]
+    \node[%
+      draw,
+      fill=white,
+      drop shadow={shadow xshift=0.25ex,shadow yshift=-0.25ex,fill=black,opacity=0.75},
+      rectangle,
+      rounded corners=2pt,
+      inner sep=1pt,
+      line width=0.5pt,
+      font=\scriptsize\sffamily
+    ](key) {#1\strut}
+  ;
+}
+
+\newcommand{\agdastroke}[1]{\keystroke{Strg}\keystroke C\keystroke #1}
+
+\urlstyle{sf}
+
+\author{Joachim Breitner\footnote{\href{mailto:mail@joachim-breitner.de}{mail@joachim-breitner.de}}}
+\title{Agda: Mit starken Typen abhängen}
+\subject{Eine Demo der abhängig getypten Programmiersprache}
+\publishers{Gulaschprogrammiernacht 12\footnote{\url{http://entropia.de/GPN12}}, Karlsruhe}
+\date{14. Juni 2011}
+
+\lstset{
+	language=Haskell
+	,literate=
+		{ö}{{\"o}}1
+	        {ä}{{\"a}}1
+                {ü}{{\"u}}1
+                {ℕ}{{$\mathbb N$}}1
+                {≤}{{$\le$}}1
+                {≡}{{$\cong$}}1
+                {≢}{{$\ncong$}}1
+                {∎}{{$\blacksquare$}}1
+                {□}{{$\square$}}1
+                {⟨}{{$\langle$}}1
+                {⟩}{{$\rangle$}}1
+                {→}{{$\rightarrow$}}1
+                {∸}{{$\stackrel{\cdot}{-}$}}1
+                {∷}{{$::$}}1
+                {∣}{{$\mid$}}1
+                {¬}{{$\neg$}}1
+                {∀}{{$\forall$}}1
+                {⊥}{{$\bot$}}1
+                {λ}{{$\lambda$}}1
+        ,columns=flexible
+        ,basewidth={.365em}
+        ,keepspaces=True
+        ,texcl=true
+        ,basicstyle=\small\sffamily
+        ,stringstyle=\itshape
+        ,showstringspaces=false
+        ,keywords={module,where,open,import,using,renaming,to,data,let,in,with}
+	,rangeprefix=\{-L 
+	,rangesuffix=-\}
+	,includerangemarker=false
+	,belowskip=0pt
+}
+\lstnewenvironment{code}{}{}
+\newcommand{\li}{\lstinline}
+
+
+\begin{document}
+
+\maketitle
+
+In diesem Vortrag werden wir sehen was man davon hat, in einer Programmiersprache mit abhängigen Typen (\emph{dependent types}) zu programmieren. Als Beispiel sei hier ein kleines Spiel gewählt:
+
+\begin{quote}
+Auf dem Tisch liegt eine Anzahl Murmeln. Abwechselnd nimmt jeder Spieler ein paar Murmeln; mindestens eine und höchstens sechs. Wer die letzte Murmel nimmt, verliert.
+\end{quote}
+
+\input{Pebbels1.lagda}
+\input{Pebbels2.lagda}
+\input{Pebbels3.lagda}
+
+\end{document}
+
