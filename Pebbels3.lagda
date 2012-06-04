@@ -30,7 +30,7 @@ open import DivModUtils
 
 Wir müssen nun also sichergehen dass der Spieler höchstes 6 Murmeln nimm. Hier könnnen wir jetzt nicht mehr einfach nur einen vorhandenen Datentypen (miss-)brauchen. Eine möglichkeit wäre es, einen Aufzählungstypen mit 6 Elemente nzu definieren, aber das wäre hässlich, weil wir damit nicht mehr schön rechnen können, außerdem möchten wir den Code später vielleicht verallgemeinern und die Anzahl der Murmeln, die man nehmen darf, konfigurierbar machen.
 
-Statt dessen betreten wir jetzt die Welt der abhängigen Typen. Das heißt dass in den Typen auch Werte auftauchen können. Insbesondere gibt es Typen für (fast) beliebige Aussagen über Werte, etwa „der Vektor \li-l- hat \li-n- Elemente“ oder, hier relevanter, „die Zahl \li-n- ist kleiner als die Zahl \li-m-“. Werte von diesem Typ sind dann Beweise, dass die Aussage stimmt. Wenn eine Funktion jetzt neben einem Wert auch einen solchen Beweis erwartet, dann kann ich sie nur aufrufen, wenn ich auch einen Beweis angebe. Die Funkion selbst wird vermutlich den Beweis nicht anschauen, aber kann sich darauf verlassen, dass die Aussage stimmt – sonst hätte ich keinen Beweis konstruieren können und die Funktion auch nicht aufrufen können.
+Statt dessen betreten wir jetzt die Welt der abhängigen Typen. Das heißt dass in den Typen auch Werte auftauchen können. Insbesondere gibt es Typen für (fast) beliebige Aussagen über Werte, etwa „der Vektor \li-xs- hat \li-n- Elemente“ oder, hier relevanter, „die Zahl \li-n- ist kleiner als die Zahl \li-m-“. Werte von diesem Typ sind dann Beweise, dass die Aussage stimmt. Wenn eine Funktion jetzt neben einem Wert auch einen solchen Beweis erwartet, dann kann ich sie nur aufrufen, wenn ich auch einen Beweis angebe. Die Funkion selbst wird vermutlich den Beweis nicht anschauen, aber kann sich darauf verlassen, dass die Aussage stimmt – sonst hätte ich keinen Beweis konstruieren können und die Funktion auch nicht aufrufen können.
 
 Wir möchten sichergehen dass ein Wert vom Typ \li-Move- immer auch ein gültiger Zug ist. Dazu erwarten wir dass ein Move nicht nur aus einer natürlichen Zahl besteht, sondern auch aus einem Beweis dass die Zahl kleiner 7 ist:
 \begin{code}
@@ -108,7 +108,7 @@ playerN 1 = pick 0 (s≤s (s≤s z≤n))
 playerN (suc (suc n)) = pick n n≤7
 \end{code}
 
-Tatsächlich akzeptiert der Typchecker den Code und ich kann \li-playerN- gegen die anderen Spieler antreten (und gewinnen) lassen! Das geht natürlich nicht mit rechten Dingen zu. Was wir gemacht haben ist, eine Funktion zu schreiben, die nicht terminiert; in der Definition von \li-n≤7- kommt ja wieder \li-n≤7- vor! Und wenn das erlaubt wäre, könnte man beliebige Aussagen beweisen; siehe oben.
+Tatsächlich akzeptiert der Typchecker den Code und ich kann \li-playerN- gegen die anderen Spieler antreten (und gewinnen) lassen! Das geht natürlich nicht mit rechten Dingen zu. Was wir gemacht haben ist, eine Funktion zu schreiben, die nicht terminiert: die Definition von \li-n≤7- verweist ja direkt auf \li-n≤7-! Und wenn das erlaubt wäre, könnte man beliebige Aussagen beweisen; siehe oben.
 
 Daher erwartet Agda dass aller Code terminierend ist. Wenn agda nicht überzeugt ist,dass das der Fall ist, dann läuft der Code zwar, aber wird eben rot hinterlegt. 
 
