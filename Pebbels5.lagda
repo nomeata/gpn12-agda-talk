@@ -88,15 +88,14 @@ opt-is-opt1 : ∀ m n n<m s → n mod 7 ≢ 1' → evenList (play m n n<m opt s)
 opt-is-opt2 : ∀ m n n<m s → n mod 7 ≡ 1' → evenList (play m n n<m s opt) ≡ false
 \end{code}
 
-Beginnen wir mit dem zweiten Fall. Generell kommt man beim Beweisen am besten voran, wenn man die Struktur des Programms, über das man den Beweis führt, nachvollzieht. Leider muss man dabei auch ein bisschen copy’n’paste betreiben.
+Beginnen wir mit dem zweiten Fall. Generell kommt man beim Beweisen am besten voran, wenn man die Struktur des Programms, über das man den Beweis führt, nachvollzieht. Den Beweis von n-k<m müssen wir zum Glück nicht kopieren, da der schon in \li-play- gegeben ist und dem Typ-Checker klar ist, dass wir den und nur genau den hier verwenden müssen.
 
 \begin{code}
-opt-is-opt2 zero m () s eq
-opt-is-opt2 (suc m) zero n<m s ()
+opt-is-opt2 0 _ () _ _
+opt-is-opt2 _ 0 _ _ ()
 opt-is-opt2 (suc m) (suc n) (s≤s n<m) s eq with s (suc n)
 opt-is-opt2 (suc m) (suc n) (s≤s n<m) s eq | pick k k<7 = cong not $
-  opt-is-opt1 m (n ∸ k) n-k<m s (lem-sub-p n k eq k<7)
-  where n-k<m = start n ∸ k <⟨ s≤s (n∸m≤n k n) ⟩ n <⟨ n<m ⟩ m □
+  opt-is-opt1 m (n ∸ k) _ s (lem-sub-p n k eq k<7)
 \end{code}
 
 Das Lemma \li!lem-sub-p! habe ich bereits vorbereitet (Modul \li-DivModUtils-):
@@ -123,12 +122,11 @@ lem-opt .(1 + toℕ r + q * 7) neq | result q (suc r) = begin
 Der zweite Fall sieht wiederum dem ersten Fall ähnlich. Entscheident ist, wo wir das \li!lem-opt! einbauen: Nach dem Aufruf von \li-with opt (suc n)- wird der Zusammenhang zwischen \li-pick k k<7- und \li-opt (suc n)- vergessen sein, den brauchen wir allerdings um \li!lem-opt! anwenden zu können. Daher müssen wir auf beides \emph{gleichzeitig} matchen.
 
 \begin{code}
-opt-is-opt1 zero m () s eq
-opt-is-opt1 (suc m) zero n<m s neq = refl
+opt-is-opt1 0 _ () _ _
+opt-is-opt1 (suc m) 0 _ _ _ = refl
 opt-is-opt1 (suc m) (suc n) (s≤s n<m) s neq with opt (suc n) | lem-opt n neq
 opt-is-opt1 (suc m) (suc n) (s≤s n<m) s neq | pick k k<7 | eq = cong not $
-  opt-is-opt2 m (n ∸ k) n-k<m s eq 
-  where n-k<m = start n ∸ k <⟨ s≤s (n∸m≤n k n) ⟩ n <⟨ n<m ⟩ m □
+  opt-is-opt2 m (n ∸ k) _ s eq 
 \end{code}
 
 Und nun ist der Beweis, dass unsere Strategie immer gewinnt, einfach:
