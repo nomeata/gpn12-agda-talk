@@ -11,6 +11,7 @@
 \usepackage{faktor}
 \usepackage{enumerate}
 \usepackage{wrapfig}
+\usepackage[safe]{tipa} % for \textlambda
 
 \usepackage[pdfauthor={Joachim Breitner},pdftitle={Agda: Mit starken Typen abhängen},pdfsubject={Eine Demo der abhängig getypten Programmiersprache}]{hyperref}
 \usepackage{listings}
@@ -64,13 +65,13 @@
                 {⟨}{{$\langle$}}1
                 {⟩}{{$\rangle$}}1
                 {→}{{$\rightarrow$}}1
-                {∸}{{$\stackrel{\cdot}{-}$}}1
+                {∸}{{$\stackrel{\bullet}{-}$}}1
                 {∷}{{$::$}}1
                 {∣}{{$\mid$}}1
                 {¬}{{$\neg$}}1
                 {∀}{{$\forall$}}1
                 {⊥}{{$\bot$}}1
-                {λ}{{$\lambda$}}1
+                {λ}{{\textlambda}}1
         ,columns=flexible
         ,basewidth={.365em}
         ,keepspaces=True
