@@ -31,6 +31,9 @@ open import DivModUtils
 data Move : Set where
   pick : (n : ℕ) → 0 < n → n < 7 → Move
 
+picked : Move → ℕ 
+picked (pick k _ _) = k
+
 Strategy = ℕ → Move
 
 evenList : {A : Set} → List A → Bool
@@ -99,9 +102,6 @@ lem-sub-p : ∀ n p → (suc n mod 7 ≡ suc zero) → suc p < 7 → ((suc n ∸
 Nun zum Beweis des zweiten Falls. Der wird sehr ähnlich aussehen, wieder brauchen wir ein Lemma analog zu dem bereits vorbereiteten, diesmal für \li-opt-. Das sieht dann so aus:
 
 \begin{code}
-picked : Move → ℕ 
-picked (pick k _ _) = k
-
 lem-opt : ∀ n → suc n mod 7 ≢ 1' → (suc n ∸ picked (opt (suc n))) mod 7 ≡ 1'
 lem-opt n neq with n divMod 7
 lem-opt .(q * 7) neq | result q zero = ⊥-elim (neq (mod-lemma q 6 1'))
