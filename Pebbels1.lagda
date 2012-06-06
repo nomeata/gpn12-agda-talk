@@ -32,9 +32,12 @@ open import DivModUtils
 
 Das letzte Modul ist ein Hilfsmodul für diesen Vortrag mit ein paar arithmetischen Lemmas, die wir hier nicht widergeben wollen.
 
-Als nächstes definieren wir ein paar Abkürzungen. Ein Spielzug ist eine natürliche Zahl; eine Spielstrategie ist eine Funktion, die jeder natürlichen Zahl einen Spielzug zuweist. Für diese UTF8-Sonderzeichen gibt es im Emacs spezielle Eingabefolgen, etwa \verb-\bn- für $\mathbb N$ und \verb-\to- für~$\to$.
+Als nächstes definieren wir ein paar Abkürzungen. Ein Spielzug ist eine natürliche Zahl, diese Paken wir in einen eigenen Datentypen um nicht zum beispiel Spielzüge und Anzahl der Murmlen auf dem Tisch durcheinander zu bringen. Eine Spielstrategie ist eine Funktion, die jeder natürlichen Zahl einen Spielzug zuweist. Für diese UTF8-Sonderzeichen gibt es im Emacs im Agda-Modus spezielle Eingabefolgen, etwa \verb-\bn- für $\mathbb N$ und \verb-\to- für~$\to$.
 \begin{code}
-Move = ℕ
+data Move : Set where
+  pick : ℕ → Move
+picked : Move → ℕ
+picked (pick k) = k
 Strategy = ℕ → Move 
 \end{code}
 
@@ -43,15 +46,15 @@ Nun definiern wir die Simulation, erstmal wie in einer stink-normalen funktional
 play : ℕ → Strategy → Strategy → List ℕ 
 play 0 _ _ = []
 play n p1 p2 with p1 n
-... | k = n ∷ play (n ∸ k) p2 p1
+... | p = n ∷ play (n ∸ picked p) p2 p1
 \end{code}
 
 Nun können wir zwei Spieler mit recht einfachen Strategien definieren; der erste nimmt immer zwei Murmeln, der zweite immer zwei:
 \begin{code}
 player1 : Strategy
-player1 _ = 1
+player1 _ = pick 1
 player2 : Strategy
-player2 _ = 2
+player2 _ = pick 2
 \end{code}
 
 Schon können wir mit dem Code herumspielen. Erst wird er mittels \keystroke{Strg}\keystroke C\keystroke L geprüft und kompiliert. Mittels \keystroke{Strg}\keystroke C\keystroke N könen wir einen Ausdruck auswerten, etwa \lstinline-play 5 player1 player2-, das wertet zur Liste \lstinline-5 ∷ 4 ∷ 2 ∷ 1 ∷ []- aus (das ist \lstinline-[5,4,3,2,1]- in Haskell-Syntax).
@@ -75,7 +78,16 @@ Damit wertet \lstinline-play 5 player1 player2- zu \lstinline-true- aus.
 Leider lässt sich dieser Code ganz schön an der Nase herumführen. Nehmen wir folgenden Spieler:
 \begin{code}
 player0 : Strategy
-player0 _ = 0
+player0 _ = pick 0
 \end{code}
 
-Offensichtlich wird dieser Spieler nie verlieren, wie wir mit \keystroke{Strg}\keystroke C\keystroke N  stichprobenhaft nachprüfen können.
+Offensichtlich wird dieser Spieler nie verlieren, wie wir mit \keystroke{Strg}\keystroke C\keystroke N  stichprobenhaft nachprüfen können. Oder, vielleicht weniger offensichtlich, folgenden Spieler:
+
+\begin{code}
+playerN : Strategy
+playerN 0 = pick 0 -- Der Fall kommt eigentlich nicht vor.
+playerN (suc n) = pick n
+\end{code}
+
+Dieser lässt seinem Gegenüber immer genau eine Murmel übrig und kann damit auch nicht verlieren.
+

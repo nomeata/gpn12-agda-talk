@@ -153,12 +153,16 @@ mod-pred .(toℕ r + q * 7) eq | result q r | no ¬p with eq3
 ∸-mono₂ zero (suc j) (suc k) j≤k = z≤n
 ∸-mono₂ (suc n) (suc j) (suc k) (s≤s j≤k) = ∸-mono₂ n j k j≤k
 
-lem-sub-p : ∀ n p → (suc n mod 7 ≡ suc zero) → suc p < 7 → ((suc n ∸ suc p) mod 7 ≢ (suc zero))
-lem-sub-p n zero eq1 _ eq2 with begin zero ≡⟨ sym (mod-pred n eq1) ⟩ n mod 7 ≡⟨ eq2 ⟩ suc zero ∎
+1' : Fin 7
+1' = suc zero
+
+lem-sub-p : ∀ n p → (suc n mod 7 ≡ 1') → 0 < p → p < 7 → ((suc n ∸ p) mod 7 ≢ 1')
+lem-sub-p _ 0 _ () _ _
+lem-sub-p n 1 eq1 _ _ eq2 with begin zero ≡⟨ sym (mod-pred n eq1) ⟩ n mod 7 ≡⟨ eq2 ⟩ suc zero ∎
 ... | ()
-lem-sub-p n (suc p) eq (s≤s <6) eq2 with n divMod 7 | mod-pred n eq 
-lem-sub-p .0 (suc p) _ (s≤s <6) () | result zero .zero  | refl
-lem-sub-p .(7 + (q * 7)) (suc p) _ (s≤s (s≤s (s≤s (<4)))) eq2 | result (suc q) .zero | refl = ⊥-elim $ 1+n≰n 1<1
+lem-sub-p n (suc (suc p)) eq _ (s≤s <6) eq2 with n divMod 7 | mod-pred n eq 
+lem-sub-p .0 (suc (suc p)) _ _ (s≤s <6) () | result zero .zero  | refl
+lem-sub-p .(7 + (q * 7)) (suc (suc p)) _ _ (s≤s (s≤s (s≤s (<4)))) eq2 | result (suc q) .zero | refl = ⊥-elim $ 1+n≰n 1<1
   where <7 : suc (6 ∸ p) ≤ 7
         <7 = s≤s (n∸m≤n p 6)
         eq4 = begin
@@ -186,4 +190,4 @@ lem-sub-p .(7 + (q * 7)) (suc p) _ (s≤s (s≤s (s≤s (<4)))) eq2 | result (su
             toℕ (suc (zero {7}))  ≡⟨ refl ⟩'
             suc zero □
 
-1' = fromℕ≤ {1} {7} (s≤s (s≤s z≤n))
+

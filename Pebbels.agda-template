@@ -28,5 +28,6 @@ open import DivModUtils
 
 {- Lemmas aus DivModUtils:
 
-lem-sub-p : ∀ n p → (suc n mod 7 ≡ suc zero) → suc p < 7 → ((suc n ∸ suc p) mod 7 ≢ (suc zero))
+lem-sub-p : ∀ n p → (suc n mod 7 ≡ 1') → 0 < p → p < 7 → ((suc n ∸ p) mod 7 ≢ 1')
+mod-lemma : ∀ x d (r : Fin (suc d)) → (toℕ r + x * suc d) mod suc d ≡ r
 -}
