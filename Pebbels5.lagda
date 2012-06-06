@@ -85,7 +85,7 @@ Aber um dort anzukommen brauchen wir ein Hilfslemma für den anderen Spieler.
 opt-is-opt2 : ∀ n s → n mod 7 ≡ 1' → winner n s opt ≡ false
 \end{code}
 
-Beginnen wir mit dem zweiten Fall. Generell kommt man beim Beweisen am besten voran, wenn man die Struktur des Programms, über das man den Beweis führt, nachvollzieht. Den Beweis von n-k<m müssen wir zum Glück nicht kopieren, da der schon in \li-play- gegeben ist und dem Typ-Checker klar ist, dass wir den und nur genau den hier verwenden müssen.
+Beginnen wir mit dem zweiten Fall. Generell kommt man beim Beweisen am besten voran, wenn man die Struktur des Programms, über das man den Beweis führt, nachvollzieht.
 
 \begin{code}
 opt-is-opt2 0 _ ()
@@ -96,7 +96,7 @@ opt-is-opt2 (suc n) s eq | pick k 0<k k<7 = cong not $
 
 Das Lemma \li!lem-sub-p! habe ich bereits vorbereitet (Modul \li-DivModUtils-):
 \begin{lstlisting}
-lem-sub-p : ∀ n p → (suc n mod 7 ≡ suc zero) → suc p < 7 → ((suc n ∸ suc p) mod 7 ≢ (suc zero))
+lem-sub-p : ∀ n p → (suc n mod 7 ≡ 1') → 0 < p → p < 7 → ((suc n ∸ p) mod 7 ≢ 1')
 \end{lstlisting}
 
 Nun zum Beweis des zweiten Falls. Der wird sehr ähnlich aussehen, wieder brauchen wir ein Lemma analog zu dem bereits vorbereiteten, diesmal für \li-opt-. Das sieht dann so aus:

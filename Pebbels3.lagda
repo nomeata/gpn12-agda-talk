@@ -70,7 +70,7 @@ In einfachen Fällen kann Agda sogar selbst herausfinden, welcher Code hier rein
 player1 : Strategy
 player1 _ = pick 1 (s≤s z≤n) (s≤s (s≤s z≤n))
 player2 : Strategy
-player2 _ = pick 2 (s≤s z≤n) ( s≤s (s≤s (s≤s z≤n)))
+player2 _ = pick 2 (s≤s z≤n) (s≤s (s≤s (s≤s z≤n)))
 \end{code}
 
 Was heißt das? Anscheinend gibt es Funkionen namens \li-z≤n- und \li-s≤s-, mit denen man sich Kleiner-Gleich-Beweise zusammenbasteln kann. 

@@ -85,9 +85,7 @@ Offensichtlich wird dieser Spieler nie verlieren, wie wir mit \keystroke{Strg}\k
 
 \begin{code}
 playerN : Strategy
-playerN 0 = pick 0 -- Der Fall kommt eigentlich nicht vor.
-playerN (suc n) = pick n
+playerN n = pick (n ∸ 1)
 \end{code}
-
 Dieser lässt seinem Gegenüber immer genau eine Murmel übrig und kann damit auch nicht verlieren.
 
