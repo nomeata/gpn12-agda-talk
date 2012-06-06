@@ -32,7 +32,7 @@ open import DivModUtils
 
 Das letzte Modul ist ein Hilfsmodul für diesen Vortrag mit ein paar arithmetischen Lemmas, die wir hier nicht widergeben wollen.
 
-Als nächstes definieren wir ein paar Abkürzungen. Ein Spielzug ist eine natürliche Zahl, diese Paken wir in einen eigenen Datentypen um nicht zum beispiel Spielzüge und Anzahl der Murmlen auf dem Tisch durcheinander zu bringen. Eine Spielstrategie ist eine Funktion, die jeder natürlichen Zahl einen Spielzug zuweist. Für diese UTF8-Sonderzeichen gibt es im Emacs im Agda-Modus spezielle Eingabefolgen, etwa \verb-\bn- für $\mathbb N$ und \verb-\to- für~$\to$.
+Als nächstes definieren wir ein paar Typen für unsere Aufgabe. Ein Spielzug ist eine natürliche Zahl, diese Paken wir in einen eigenen Datentypen um nicht zum beispiel Spielzüge und Anzahl der Murmlen auf dem Tisch durcheinander zu bringen. Eine Spielstrategie ist eine Funktion, die jeder natürlichen Zahl einen Spielzug zuweist. Für diese UTF8-Sonderzeichen gibt es im Emacs im Agda-Modus spezielle Eingabefolgen, etwa \verb-\bn- für $\mathbb N$ und \verb-\to- für~$\to$.
 \begin{code}
 data Move : Set where
   pick : ℕ → Move
