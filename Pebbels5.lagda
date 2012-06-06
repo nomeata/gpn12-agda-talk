@@ -52,7 +52,7 @@ player2 _ = pick 2 (s≤s z≤n)  (s≤s (s≤s (s≤s z≤n)))
 Zum Abschluss möchten wir jetzt noch einen besseren Spieler implementieren, nämlich einen, der die optimale Strategie fährt:
 
 \begin{quote}
-Nimm immer so viele Murmeln, dass danach eine mehr als ein Vielfaches von 7 liegen bleigen.
+Nimm immer so viele Murmeln, dass danach ein Vielfaches von 7 plus eine weitere Murmel liegen bleiben.
 \end{quote}
 
 Das geht immer, es sei denn, es liegt bereits eine mehr als ein Vielfaches von 7 Murmeln auf dem Tisch. Wenn wir also z.B. mit 100 Murmeln beginnen und der erste Spieler diese Strategie fährt, gewinnt er auf jeden Fall.
