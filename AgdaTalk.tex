@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[german]{babel}
 \usepackage{amsmath}
+\usepackage{amsfonts}
 \usepackage[standard]{ntheorem}
 \usepackage{amscd}
 \usepackage{mathtools}
@@ -12,6 +13,7 @@
 \usepackage{enumerate}
 \usepackage{wrapfig}
 \usepackage[safe]{tipa} % for \textlambda
+\usepackage{hevea}
 
 \usepackage[pdfauthor={Joachim Breitner},pdftitle={Agda: Mit starken Typen abhängen},pdfsubject={Eine Demo der abhängig getypten Programmiersprache}]{hyperref}
 \usepackage{listings}
@@ -25,7 +27,9 @@
 \usepackage{tikz}
 \usetikzlibrary{shadows}
 
+\newstyle{.keystroke}{display:inline;border:1px solid black;padding:1px;background:light gray}
 \newcommand*\keystroke[1]{%
+\begin{latexonly}%
   \tikz[baseline=(key.base)]
     \node[%
       draw,
@@ -37,10 +41,18 @@
       line width=0.5pt,
       font=\scriptsize\sffamily
     ](key) {#1\strut}
-  ;
+  ;%
+\end{latexonly}%
+\ifhevea%
+\@span{class="keystroke"}%
+#1%
+\@clearstyle %
+\fi%
 }
 
 \newcommand{\agdastroke}[1]{\keystroke{Strg}\keystroke C\keystroke #1}
+
+
 
 \urlstyle{sf}
 
