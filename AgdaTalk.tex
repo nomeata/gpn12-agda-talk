@@ -102,6 +102,30 @@ Andrew Hunt und David Thomas empfehlen
 \end{quote}
 Ganz in diesem Sinne widmen wir uns heute der Programmiersprache Agda. Agda ist zum einen eine funktionale Programmiersprache wie Haskell oder ML. Das alleine wäre jetzt nicht so spannend, aber Agda hat ein sehr mächtiges Typsystem mit sogenannten abhängigen Typen (\emph{dependent types}), die dem Programmierer erlauben sehr viele Aussagen über sein Programm als Typen anzugeben und vom Compiler prüfen zu lassen. Das geht sogar so weit dass Agda auch ein Beweisprüfer wie Coq oder Isabelle ist, mit dem sich (konstruktive) Mathematik betreiben lässt.
 
+Dass das geht, und vor allem dass das ziemlich gut geht, liegt an folgender „verhält-sich-zu-wie-Relation“: Programme zu Typen wie Beweise zu Aussagen. Eine Aussage wie
+\begin{quote}
+Wenn aus $\alpha$ $\beta$ folgt, dann folgt,
+wenn $\beta$ nicht gilt,  auch
+dass $\alpha$ nicht gilt.
+\end{quote}
+hat einen Beweis, etwa
+\begin{quote}
+Es gelte $\beta$ nicht. Beweis per Widerspruch. Angenommen, es
+gelte $\alpha$. Dann folgt aus der Voraussetzung, dass $\beta$ gilt.
+Das ist ein Widerspruch dazu, dass $\beta$ nicht
+gilt, womit die Aussage gezeigt ist.
+$\blacksquare$
+\end{quote}
+Der Aussage entspricht der Typ
+\begin{quote}
+\li!(a → b) → ¬ b → ¬ a!
+\end{quote}
+und dem Beweis entspricht das Programm
+\begin{quote}
+\li!λ f x a. x (f a)!.
+\end{quote}
+Ein Typ, zu dem es ein Programm gibt, entspricht damit einer bewiesenen Aussage und Beweisen ist plötzlich nichts anderes mehr als Programmieren. Wir sind als auf der Gulaschbeweisnach!  Das Ganze ist übrigens bekannt als der Curry-Howard-Isomorphismus.
+
 In diesem Vortrag werden wir beide Aspekte von Agda sehen, als Beispiel dient hier ein kleines Spiel:
 
 \begin{quote}

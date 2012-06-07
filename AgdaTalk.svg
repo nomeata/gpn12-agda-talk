@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.76396746"
-     inkscape:cx="124.31018"
-     inkscape:cy="328.96735"
+     inkscape:zoom="4.3216526"
+     inkscape:cx="298.05633"
+     inkscape:cy="327.11621"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -8096,7 +8096,7 @@
            style="font-style:italic;text-align:center;text-anchor:middle;-inkscape-font-specification:Bitstream Charter Italic"
            id="tspan13591"><tspan
              style="font-style:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Bitstream Charter"
-             id="tspan13593">Wenn aus α β folgt, dann folgt</tspan></tspan></tspan><tspan
+             id="tspan13593">Wenn aus α β folgt, dann folgt,</tspan></tspan></tspan><tspan
          sodipodi:role="line"
          x="-401.4462"
          y="678.14282"
@@ -8104,7 +8104,15 @@
            style="font-style:italic;text-align:center;text-anchor:middle;-inkscape-font-specification:Bitstream Charter Italic"
            id="tspan13597"><tspan
              style="font-style:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Bitstream Charter"
-             id="tspan13599">aus ¬β auch ¬α.</tspan></tspan></tspan></text>
+             id="tspan13599">wenn β nicht gilt,  auch</tspan></tspan></tspan><tspan
+         sodipodi:role="line"
+         x="-401.4462"
+         y="684.67725"
+         id="tspan38275"><tspan
+           style="font-style:italic;text-align:center;text-anchor:middle;-inkscape-font-specification:Bitstream Charter Italic"
+           id="tspan38277"><tspan
+             style="font-style:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Bitstream Charter"
+             id="tspan38279">dass α nicht gilt.</tspan></tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:3.153404px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:Bitstream Charter"
@@ -8115,19 +8123,19 @@
          sodipodi:role="line"
          x="270.82193"
          y="753.2077"
-         id="tspan13595-5">Es gelte ¬β. Beweis per Widerspruch. Angenommen,</tspan><tspan
+         id="tspan13641">Es gelte β nicht. Beweis per Widerspruch. Angenommen, es</tspan><tspan
          sodipodi:role="line"
          x="270.82193"
          y="757.17285"
-         id="tspan13641">es gelte α. Dann folgt aus der Voraussetzung, dass</tspan><tspan
+         id="tspan38287">gelte α. Dann folgt aus der Voraussetzung, dass β gilt.</tspan><tspan
          sodipodi:role="line"
          x="270.82193"
          y="761.138"
-         id="tspan13662">β gilt. Das ist ein Widerspruch zu ¬β, womit</tspan><tspan
+         id="tspan38299">Das ist ein Widerspruch dazu, dass β nicht</tspan><tspan
          sodipodi:role="line"
          x="270.82193"
          y="765.10315"
-         id="tspan13664">die Aussage gezeigt ist. ∎</tspan></text>
+         id="tspan38291">gilt, womit die Aussage gezeigt ist. ∎</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:5.19666672px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:Bitstream Charter"
@@ -8138,7 +8146,7 @@
          sodipodi:role="line"
          x="325.21677"
          y="620.13226"
-         id="tspan13595-0">(a → b) → ¬ β → ¬ α</tspan></text>
+         id="tspan13595-0">(a → b) → ¬ b → ¬ a</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:9.08666039px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:Bitstream Charter"
