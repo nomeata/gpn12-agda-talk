@@ -1,10 +1,3 @@
-\section{Termination}
-
-Das hat im Vortrag leider keinen Platz mehr gehabt, aber der Vollständigkeit halber will ich hier noch darauf eingehen. Bisher waren die Funktion \li-play- und die Beweise, die darauf aufbauen, rot markiert. Damit zeigt Agda dass es nicht weiß ob \li-play- terminiert, also garantiert in keine Endlosschleife läuft. Warum ist das wichtig? Weil man mit Endlosschleifen beliebige Aussagen beweisen kann:
-\begin{lstlisting}
-unsinn : 42 < 7
-unsinn = unsinn
-\end{lstlisting}
 
 Nun erkennt Agda in einfachen Fällen die Termination, etwa in der Funktion \li-evenList-. Hier ruft \li-evenList (x ∷ xs)- im rekursiven Fall \li-evenList xs- auf, das Argument ist also ein Teil des Parameters und Agda ist sich sicher dass diese Funktion irgendwann fertig ist.
 
@@ -34,7 +27,7 @@ open Algebra.CommutativeSemiring commutativeSemiring using (+-comm)
 open import DivModUtils
 
 data Move : Set where
-  pick : (n : ℕ) → 0 < n → n < 7 → Move
+  pick : (n : ℕ) → 1 ≤ n → n ≤ 6 → Move
 
 picked : Move → ℕ 
 picked (pick k _ _) = k
@@ -46,13 +39,13 @@ evenList [] = true
 evenList (_ ∷ xs) = not (evenList xs)
 
 player1 : Strategy
-player1 _ = pick 1 (s≤s z≤n) (s≤s (s≤s z≤n))
+player1 _ = pick 1 (s≤s z≤n) (s≤s z≤n)
 player2 : Strategy
-player2 _ = pick 2 (s≤s z≤n)  (s≤s (s≤s (s≤s z≤n)))
+player2 _ = pick 2 (s≤s z≤n)  (s≤s (s≤s z≤n))
 opt : Strategy
 opt k with pred k mod 7
-... | zero = pick 1 (s≤s z≤n) (s≤s (s≤s z≤n))
-... | (suc r) = pick (toℕ (suc r)) (s≤s z≤n) (s≤s (bounded r))
+... | zero = pick 1 (s≤s z≤n) (s≤s z≤n)
+... | (suc r) = pick (toℕ (suc r)) (s≤s z≤n) (bounded r)
 \end{code}
 \end{comment}
 
@@ -77,8 +70,8 @@ opt-is-opt2 : ∀ n a s → n mod 7 ≡ 1' → evenList (play n a s opt) ≡ fal
 opt-is-opt2 0 _ _ ()
 opt-is-opt2 (suc n) (acc a) s eq with s (suc n)
 ... | pick 0 () _
-... | pick (suc k) 0<k k<7 = cong not $
-  opt-is-opt1 (suc n ∸ suc k) _ s (lem-sub-p n (suc k) eq 0<k k<7)
+... | pick (suc k) 1≤k k≤6 = cong not $
+  opt-is-opt1 (suc n ∸ suc k) _ s (lem-sub-p n (suc k) eq 1≤k k≤6)
 
 
 lem-opt : ∀ n → suc n mod 7 ≢ 1' → (suc n ∸ picked (opt (suc n))) mod 7 ≡ 1'
@@ -96,7 +89,7 @@ lem-opt .(1 + toℕ r + q * 7) neq | result q (suc r) = begin
 opt-is-opt1 0 _ _ _ = refl
 opt-is-opt1 (suc n) (acc a) s neq with opt (suc n) | lem-opt n neq
 ... | pick 0 () _ | _
-... | pick (suc k) 0<k k<7 | eq = cong not $
+... | pick (suc k) 1≤k k≤6 | eq = cong not $
   opt-is-opt2 (suc n ∸ (suc k)) _ s eq
 
 opt-is-opt n s = opt-is-opt1 n _ s

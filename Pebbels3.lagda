@@ -32,7 +32,7 @@ Statt dessen betreten wir jetzt die Welt der abhängigen Typen. Das heißt dass 
 Wir möchten sichergehen dass ein Wert vom Typ \li-Move- immer auch ein gültiger Zug ist. Dazu erwarten wir dass ein Move nicht nur aus einer natürlichen Zahl besteht, sondern auch aus einem Beweis dass die Zahl größer 0 und kleiner 7 ist:
 \begin{code}
 data Move : Set where
-  pick : (n : ℕ) → 0 < n → n < 7 → Move
+  pick : (n : ℕ) → 1 ≤ n → n ≤ 6 → Move
 
 picked : Move → ℕ
 picked (pick k _ _) = k
@@ -58,14 +58,15 @@ player2 : Strategy
 player2 _ = pick 1 ? ?
 \end{lstlisting}
 
-Nach dem Laden (\keystroke{Strg}\keystroke C\keystroke L) werden daraus Löcher, die man inspizieren kann, so kann man sich mit \keystroke{Strg}\keystroke C\keystroke , das aktuelle Ziel anzeigen, also den Typ, der an diesem Loch erwartet wird. Dort steht im zweiten Loch \li-2 ≤ 7-. Warum nicht \li-1 < 7-, wie wir es im Code angegeben haben? Weil \li-a < b- nur eine Abkürzung für \li-suc a ≤ b- ist, und Agda das Ziel soweit auswertet wie möglich.
+Nach dem Laden (\keystroke{Strg}\keystroke C\keystroke L) werden daraus Löcher, die man inspizieren kann, so kann man sich mit \keystroke{Strg}\keystroke C\keystroke , das aktuelle Ziel anzeigen, also den Typ, der an diesem Loch erwartet wird.
+%Dort steht im zweiten Loch \li-2 ≤ 7-. Warum nicht \li-1 < 7-, wie wir es im Code angegeben haben? Weil \li-a < b- nur eine Abkürzung für \li-suc a ≤ b- ist, und Agda das Ziel soweit auswertet wie möglich.
 
 In einfachen Fällen kann Agda sogar selbst herausfinden, welcher Code hier reinmuss, dazu probieren wir \keystroke{Strg}\keystroke C\keystroke A  (A für „auto“) und erhalten:
 \begin{code}
 player1 : Strategy
-player1 _ = pick 1 (s≤s z≤n) (s≤s (s≤s z≤n))
+player1 _ = pick 1 (s≤s z≤n) (s≤s z≤n)
 player2 : Strategy
-player2 _ = pick 2 (s≤s z≤n) (s≤s (s≤s (s≤s z≤n)))
+player2 _ = pick 2 (s≤s z≤n) (s≤s (s≤s z≤n))
 \end{code}
 
 Was heißt das? Anscheinend gibt es Funkionen namens \li-z≤n- und \li-s≤s-, mit denen man sich Kleiner-Gleich-Beweise zusammenbasteln kann. 
@@ -77,7 +78,7 @@ data _≤_ : Rel ℕ Level.zero where
   s≤s : ∀ {m n} (m≤n : m ≤ n) → suc m ≤ suc n
 \end{lstlisting}
 
-In Worten: \li-z≤n- ist ein Beweis dass Null kleiner-gleich jeder Zahl ist, und dass ich einen Vergleich zweier Zahlen auf ihren Nachfolger übertragen kann. Also hat \li-s≤s (s≤s z≤n))- den Typ \li-suc (suc zero) ≤ suc (suc m)- für jede natürliche Zahl \li-m-. In unserem Fall heißt das, wie gewünscht \li-2 ≤ 7-.
+In Worten: \li-z≤n- ist ein Beweis dass Null kleiner-gleich jeder Zahl ist, und dass ich einen Vergleich zweier Zahlen auf ihren Nachfolger übertragen kann. Also hat \li-s≤s z≤n)- den Typ \li-suc zero ≤ suc m- für jede natürliche Zahl \li-m-. In unserem Fall heißt das, wie gewünscht \li-1 ≤ 6-.
 
 \begin{comment}
 \begin{code}
@@ -89,5 +90,5 @@ winner n p1 p2 = evenList (play n p1 p2)
 \end{code}
 \end{comment}
 
-So, was haben wir jetzt davon? Wir können nun weder \li-player0- noch \li-playerN- schreiben, denn es wird uns nicht gelingen \li-0 < 0- oder \li-n < 7- für beliebige \li-n- zu beweisen. Damit haben wir jetzt ungültige Spieler vollständig ausgeschlossen!
+So, was haben wir jetzt davon? Wir können nun weder \li-player0- noch \li-playerN- schreiben, denn es wird uns nicht gelingen \li-1 ≤ 0- oder \li-n ≤ 6- für beliebige \li-n- zu beweisen. Damit haben wir jetzt ungültige Spieler vollständig ausgeschlossen!
 
