@@ -110,6 +110,12 @@ lem-opt .(1 + toℕ r + q * 7) neq | result q (suc r) = begin
   1' ∎
 \end{code}
 
+Das Lemma \li!-mod-lemma! ist auch aus \li-DivModUtils\-:
+\begin{lstlisting}
+mod-lemma : ∀ x d (r : Fin (suc d)) → (toℕ r + x * suc d) mod suc d ≡ r
+\end{lstlisting}
+
+
 Der zweite Fall sieht wiederum dem ersten Fall ähnlich. Entscheident ist, wo wir das \li!lem-opt! einbauen: Nach dem Aufruf von \li-with opt (suc n)- wird der Zusammenhang zwischen \li-pick k 1≤k k≤6- und \li-opt (suc n)- vergessen sein, den brauchen wir allerdings um \li!lem-opt! anwenden zu können. Daher müssen wir auf beides \emph{gleichzeitig} matchen.
 
 \begin{code}
