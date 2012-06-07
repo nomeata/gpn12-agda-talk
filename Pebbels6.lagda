@@ -36,6 +36,7 @@ open DecTotalOrder decTotalOrder using () renaming (refl to ≤-refl; antisym to
 import Algebra
 open Algebra.CommutativeSemiring commutativeSemiring using (+-comm; +-assoc)
 
+
 open import DivModUtils
 
 data Move : Set where
@@ -85,6 +86,7 @@ opt-is-opt2 (suc n) (acc a) s eq with s (suc n)
 ... | pick (suc k) 0<k k<7 = cong not $
   opt-is-opt1 (suc n ∸ suc k) _ s (lem-sub-p n (suc k) eq 0<k k<7)
 
+
 lem-opt : ∀ n → suc n mod 7 ≢ 1' → (suc n ∸ picked (opt (suc n))) mod 7 ≡ 1'
 lem-opt n neq with n divMod 7
 lem-opt .(q * 7) neq | result q zero = ⊥-elim (neq (mod-lemma q 6 1'))
@@ -104,5 +106,6 @@ opt-is-opt1 (suc n) (acc a) s neq with opt (suc n) | lem-opt n neq
   opt-is-opt2 (suc n ∸ (suc k)) _ s eq
 
 opt-is-opt n s = opt-is-opt1 n _ s
+
 \end{code}
 
