@@ -5,24 +5,19 @@ module Pebbels3 where
 open import Data.Nat
 open import Data.List
 open import Data.Bool
-open import Data.Nat.Divisibility
 open import Data.Nat.DivMod
-open import Relation.Nullary
 open import Data.Nat.Properties
-open import Data.Fin using (Fin; toℕ; zero; suc; fromℕ≤)
+open import Data.Fin using (Fin; toℕ; zero; suc)
 open import Data.Fin.Props
 open import Relation.Binary.PropositionalEquality
 open import Function
-open import Data.Product
 open import Relation.Binary
 open import Data.Empty
-open import  Relation.Nullary.Negation
+open import Relation.Nullary.Negation
 open ≡-Reasoning
-open ≤-Reasoning
-  renaming (begin_ to start_; _∎ to _□; _≡⟨_⟩_ to _≡⟨_⟩'_)
-open DecTotalOrder decTotalOrder using () renaming (refl to ≤-refl; antisym to ≤-antisym)
+open DecTotalOrder decTotalOrder using () renaming (refl to ≤-reflv)
 import Algebra
-open Algebra.CommutativeSemiring commutativeSemiring using (+-comm; +-assoc)
+open Algebra.CommutativeSemiring commutativeSemiring using (+-comm)
 
 open import DivModUtils
 \end{code}
